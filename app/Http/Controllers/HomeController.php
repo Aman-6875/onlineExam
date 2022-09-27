@@ -8,7 +8,10 @@ use App\Models\ExamQuestion;
 use App\Models\QuestionBank;
 use App\Models\QuestionOptions;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -211,5 +214,24 @@ class HomeController extends Controller
         $exam_id = session()->get('exam_id');
         $request->session()->put('examQuestion', ExamQuestion::where('exam_id', $exam_id)->with('question')->get());
         return redirect()->to('/create-exam-question');
+    }
+
+    public function login()
+    {
+        return view('login');
+    }
+    public function registration()
+    {
+        return view('registration');
+    }
+
+    public function RegisterUser(Request $request)
+    {
+        // return $request->all();
+        // User::crea
+        $request->password = Hash::make($request->password);
+        $user_id = User::insertGetId($request->except('_token'));
+        Auth::loginUsingId($user_id);
+        return redirect()->to('/home');
     }
 }

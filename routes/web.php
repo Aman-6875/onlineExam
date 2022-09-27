@@ -15,10 +15,10 @@ use App\Models\QuestionBank;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('start');
+});
+Route::get('/home', [HomeController::class, 'index']);
 Route::get('/details/{id}', [HomeController::class, 'examDetails']);
 Route::post('/submit-answer', [HomeController::class, 'submitAnswer']);
 Route::get('/create-question-bank', [HomeController::class, 'questionBank']);
@@ -43,3 +43,10 @@ Route::get('/filter-question/{id}', function ($id) {
     $questions = QuestionBank::where('id', $id)->with('questions')->first();
     return response()->json(['questions' => $questions, 'success' => 1], 200);
 });
+
+
+Route::get('login', [HomeController::class, 'login']);
+Route::get('registration', [HomeController::class, 'registration']);
+
+
+Route::post('user-register', [HomeController::class, 'RegisterUser']);

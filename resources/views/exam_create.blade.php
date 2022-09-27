@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <h1 style="text-align:center;color:green;">
-            <a href="/">Home</a>
+            <a href="/home">Home</a>
         </h1>
         <h1 style="text-align:center;color:green;">
             <a href="/create-question-bank">Question Bank</a>

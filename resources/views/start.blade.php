@@ -17,21 +17,11 @@
             <a href="/home">Home</a>
         </h1>
         <h1 style="text-align:center;color:green;">
-            <a href="/create-question-bank">Question Bank</a>
-            <a href="/create-question">Question</a>
-            <a href="/create-exam">Exam</a>
-            <a href="/create-exam-question">Set ExamQuestion</a>
+            <a href="/login">Login</a>
+            <a href="/registration">Registration</a>
+
         </h1>
-        <!-- Bootstrap table class -->
-        <form method="POST" action="/question-bank-create">
-            @csrf
-            <div class="form-group">
-                <label for="exampleInput">Title</label>
-                <input type="text" class="form-control" id="exampleInput" name="title" aria-describedby="emailHelp"
-                    placeholder="Enter Title">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+
     </div>
 </body>
 

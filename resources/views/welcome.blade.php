@@ -19,9 +19,8 @@
         <h1 style="text-align:center;color:green;">
             <a href="/create-question-bank">Question Bank</a>
             <a href="/create-question">Question</a>
-            <a href="/create-exam">Exam</a>
+            <a href="/create-exam">Create Exam</a>
             <a href="/create-exam-question">Set ExamQuestion</a>
-            <a href="/logout">Logout</a>
         </h1>
         <h1 style="text-align:center;color:green;">
             <a href="/logout">Logout</a>

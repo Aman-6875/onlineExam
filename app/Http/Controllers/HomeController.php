@@ -12,9 +12,11 @@ use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Traits\VerifyUser;
 
 class HomeController extends Controller
 {
+    use VerifyUser;
     public function index(Request $request)
     {
         $request->session()->forget('exam_id');
@@ -105,10 +107,16 @@ class HomeController extends Controller
 
     public function questionBank()
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         return view('question_bank_create');
     }
     public function questionBankCreate(Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         $data = [
             'title' => $request->title,
             'examinar_id' => 1, //auth->id
@@ -118,10 +126,16 @@ class HomeController extends Controller
     }
     public function question()
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         return view('question_create');
     }
     public function questionCreate(Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         // return $request->all();
 
         // Question::create($request->except(['_token', 'options', 'answer']));
@@ -156,6 +170,9 @@ class HomeController extends Controller
     }
     public function exam(Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
 
         return view('exam_create');
     }
@@ -181,6 +198,9 @@ class HomeController extends Controller
 
     public function addExamQuestion(Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         $request['number'] = Question::where('id', $request->question_id)->pluck('number')->first();
         ExamQuestion::create($request->except('_token'));
         $request->session()->put('examQuestion', ExamQuestion::where('exam_id', $request->exam_id)->with('question')->get());
@@ -191,15 +211,24 @@ class HomeController extends Controller
 
     public function examQuestion(Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
 
         return view('exam_question_create');
     }
     public function editExamQuestion($id)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         return view('edit_exam_question_create')->with('exam_Question', ExamQuestion::where('id', $id)->first());
     }
     public function deleteExamQuestion($id, Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         ExamQuestion::where('id', $id)->delete();
         $exam_id = session()->get('exam_id');
         $request->session()->put('examQuestion', ExamQuestion::where('exam_id', $exam_id)->with('question')->get());
@@ -207,6 +236,9 @@ class HomeController extends Controller
     }
     public function UpdateExamQuestion(Request $request)
     {
+        if ($this->checkStuden()) {
+            return "You don't have the access to create question";
+        }
         $data = [
             'number' => $request->number,
         ];

@@ -49,4 +49,5 @@ Route::get('login', [HomeController::class, 'login']);
 Route::get('registration', [HomeController::class, 'registration']);
 
 
+Route::post('user-login', [HomeController::class, 'LoginUser']);
 Route::post('user-register', [HomeController::class, 'RegisterUser']);

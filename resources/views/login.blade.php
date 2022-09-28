@@ -22,6 +22,7 @@
 
         </h1>
         <form method="POST" action="/user-login">
+            @csrf
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <input type="email" id="form2Example1" name="email" class="form-control" />
@@ -51,7 +52,7 @@
             </div>
 
             <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
             <!-- Register buttons -->
             <div class="text-center">

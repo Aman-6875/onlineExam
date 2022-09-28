@@ -229,9 +229,27 @@ class HomeController extends Controller
     {
         // return $request->all();
         // User::crea
-        $request->password = Hash::make($request->password);
+        $request['password'] = Hash::make($request->password);
+        // dd($request->all());
         $user_id = User::insertGetId($request->except('_token'));
         Auth::loginUsingId($user_id);
         return redirect()->to('/home');
+    }
+    public function LoginUser(Request $request)
+    {
+        // return $request->all();
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->to('/home');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }
